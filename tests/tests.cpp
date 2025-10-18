@@ -15,6 +15,10 @@ TEST(solve, x_sq_plus_2_x_plus_1) {
     EXPECT_EQ(solve(1, 2, 1, epsilon), std::vector<double>({-1,-1}));
 }
 
+TEST(solve, a_is_almost_zero) {
+    EXPECT_THROW(solve(1e-9,2,1,epsilon),a_is_almost_zero_exception);
+}
+
 
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
