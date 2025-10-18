@@ -9,5 +9,8 @@ std::vector<double> solve(double a, double b, double c, double epsilon) {
     if(D<-epsilon) {
         return std::vector<double>();
     }
+    if(D<=epsilon) {
+        return std::vector<double>(2, (-b)/(2.*a));
+    }
     return std::vector<double>({ (-b-std::sqrt(D))/(2.*a), (-b+std::sqrt(D))/(2.*a) });
 }

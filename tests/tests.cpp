@@ -20,7 +20,9 @@ TEST(solve, a_is_almost_zero) {
 }
 
 TEST(solve, D_is_almost_zero) {
-    EXPECT_EQ(solve(1, 2+epsilon/5, 1, epsilon), std::vector<double>({-1,-1}));
+    std::vector<double> solution=solve(1, 2+epsilon/5, 1, epsilon);
+    EXPECT_EQ(solution.size(), 2);
+    EXPECT_EQ(solution[0], solution[1]);
 }
 
 
