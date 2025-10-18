@@ -6,7 +6,7 @@ add_subdirectory(${CMAKE_CURRENT_BINARY_DIR}/../googletest-src
 add_executable(runTests tests.cpp)
 
 # Линковка с GoogleTest и нашей библиотекой
-target_link_libraries(runTests 
+target_link_libraries(runTests PRIVATE
     GTest::gtest_main 
     solve
 )

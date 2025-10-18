@@ -55,6 +55,7 @@ if(ENABLE_COVERAGE AND COVERAGE_AVAILABLE)
         COMMAND ${LCOV_PATH} --list coverage.info
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
         COMMENT "Generating code coverage report"
+        DEPENDS runTests
     )
 endif()
 

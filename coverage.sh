@@ -1,21 +1,24 @@
 #!/bin/bash
 
-# Create build directory
+set -e  # Выход при ошибке
+
+echo "Configuring project with coverage..."
 mkdir -p build
 cd build
 
 # Configure with coverage
 cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_COVERAGE=ON ..
 
-# Build
+echo "Building project..."
 make
 
-# Run tests
+echo "Running tests..."
 ./tests/runTests
 
-# Generate coverage report
+echo "Generating coverage report..."
 lcov --directory . --capture --output-file coverage.info
-lcov --remove coverage.info '/usr/*' '*/tests/*' '*/extern/*' --output-file coverage.info
+lcov --remove coverage.info '*/usr/*' '*/tests/*' '*/extern/*' '*/_deps/*' --output-file coverage.info
 genhtml coverage.info --output-directory coverage_report
 
 echo "Coverage report generated in build/coverage_report/"
+echo "Open build/coverage_report/index.html to view the report"
