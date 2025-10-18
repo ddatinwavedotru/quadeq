@@ -5,10 +5,19 @@ project(quadeq LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_executable(quadeq main.cpp)
+# Включение CTest
+include(CTest)
 
-include(GNUInstallDirs)
-install(TARGETS quadeq
-    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+# Скачивание GoogleTest
+configure_file(CMakeLists.txt.in googletest-download/CMakeLists.txt)
+execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
+    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/googletest-download
 )
+execute_process(COMMAND ${CMAKE_COMMAND} --build .
+    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/googletest-download
+)
+
+# Добавление поддиректориев
+add_subdirectory(src)
+add_subdirectory(tests)
+
