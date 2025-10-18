@@ -25,6 +25,27 @@ TEST(solve, D_is_almost_zero) {
     EXPECT_EQ(solution[0], solution[1]);
 }
 
+TEST(solve, not_a_numbers) {
+    double special_values[]={
+        std::numeric_limits<double>::quiet_NaN(),
+        std::numeric_limits<double>::signaling_NaN(),
+        std::numeric_limits<double>::infinity(),
+        -std::numeric_limits<double>::infinity()
+    };
+    for(double a: special_values) {
+        EXPECT_THROW(solve(a,2,1,epsilon),a_is_special_double_exception);
+    }
+    for(double b: special_values) {
+        EXPECT_THROW(solve(1,b,1,epsilon),b_is_special_double_exception);
+    }
+    for(double c: special_values) {
+        EXPECT_THROW(solve(1,2,c,epsilon),c_is_special_double_exception);
+    }
+    for(double epsilon: special_values) {
+        EXPECT_THROW(solve(1,2,1,epsilon),epsilon_is_special_double_exception);
+    }
+}
+
 
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
