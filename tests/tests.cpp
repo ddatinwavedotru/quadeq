@@ -1,8 +1,10 @@
 #include "gtest/gtest.h"
 #include "solve.h"
 
+const double epsilon=1e-7;
+
 TEST(solve, x_sq_plus_1) {
-    EXPECT_EQ(solve(1, 0, 1), std::vector<double>());
+    EXPECT_EQ(solve(1, 0, 1,epsilon), std::vector<double>());
 }
 
 
