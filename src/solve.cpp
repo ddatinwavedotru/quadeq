@@ -2,6 +2,18 @@
 #include <cmath>
 
 std::vector<double> solve(double a, double b, double c, double epsilon) {
+    if(!std::isfinite(a)) {
+        throw a_is_special_double_exception();
+    }
+    if(!std::isfinite(b)) {
+        throw b_is_special_double_exception();
+    }
+    if(!std::isfinite(c)) {
+        throw c_is_special_double_exception();
+    }
+    if(!std::isfinite(epsilon)) {
+        throw epsilon_is_special_double_exception();
+    }
     if(std::abs(a)<epsilon) {
         throw a_is_almost_zero_exception();
     }
