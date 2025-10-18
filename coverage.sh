@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e  # Выход при ошибке
+set -e
 
 echo "Cleaning previous builds..."
 rm -rf build
@@ -14,21 +14,35 @@ echo "Building project..."
 make -j4
 
 echo "Running tests..."
-./tests/runTests || true  # Продолжаем даже если тесты падают
+./tests/runTests || true
 
-echo "Generating coverage report..."
+echo "Generating coverage report with gcovr..."
 
-# Создаем отчет с дополнительными опциями для обработки C++ кода
-lcov --directory . --capture --output-file coverage.info --rc lcov_branch_coverage=1
-lcov --remove coverage.info '*/usr/*' '*/tests/*' '*/extern/*' '*/_deps/*' '*/googletest/*' --output-file coverage.info --rc lcov_branch_coverage=1
-
-# Генерируем HTML с деманглингом C++ имен
-genhtml coverage.info --output-directory coverage_report --demangle-cpp --branch-coverage
-
-echo "==========================================="
-echo "Coverage report generated in build/coverage_report/"
-echo "Open build/coverage_report/index.html to view the report"
-echo "==========================================="
-
-# Показываем сводку
-lcov --list coverage.info --rc lcov_branch_coverage=1
+# Проверяем доступность gcovr
+if command -v gcovr >/dev/null 2>&1; then
+    gcovr -r .. \
+          --filter ../src/ \
+          --exclude ../tests/ \
+          --exclude ../extern/ \
+          --exclude ../_deps/ \
+          --html --html-details -o coverage_report.html \
+          --print-summary
+    
+    # Генерируем XML для Codecov
+    gcovr -r .. \
+          --filter ../src/ \
+          --exclude ../tests/ \
+          --exclude ../extern/ \
+          --exclude ../_deps/ \
+          --xml > coverage.xml
+          
+    echo "==========================================="
+    echo "Coverage report generated:"
+    echo "HTML: build/coverage_report.html"
+    echo "XML: build/coverage.xml"
+    echo "==========================================="
+else
+    echo "ERROR: gcovr not found. Please install gcovr."
+    echo "On Ubuntu/Debian: sudo apt-get install gcovr"
+    exit 1
+fi

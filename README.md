@@ -1,8 +1,8 @@
 # quadeq
 otus homework on modular testing for a quadratic equation solver
 
-![CMake](https://github.com/username/repo/actions/workflows/cmake-multi-platform.yml/badge.svg)
-![Coverage](https://codecov.io/gh/username/repo/branch/main/graph/badge.svg)
+![CMake](https://github.com/ddatinwavedotru/quadeq/actions/workflows/cmake-multi-platform.yml/badge.svg)
+![Coverage](https://codecov.io/gh/ddatinwavedotru/quadeq/branch/main/graph/badge.svg)
 
 A C++ project with CMake, Google Test, and code coverage.
 
