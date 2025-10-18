@@ -19,6 +19,10 @@ TEST(solve, a_is_almost_zero) {
     EXPECT_THROW(solve(1e-9,2,1,epsilon),a_is_almost_zero_exception);
 }
 
+TEST(solve, D_is_almost_zero) {
+    EXPECT_EQ(solve(1, 2+epsilon/5, 1, epsilon), std::vector<double>({-1,-1}));
+}
+
 
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
