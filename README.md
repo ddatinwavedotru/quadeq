@@ -1,2 +1,23 @@
 # quadeq
 otus homework on modular testing for a quadratic equation solver
+
+![CMake](https://github.com/username/repo/actions/workflows/cmake-multi-platform.yml/badge.svg)
+![Coverage](https://codecov.io/gh/username/repo/branch/main/graph/badge.svg)
+
+A C++ project with CMake, Google Test, and code coverage.
+
+## Building
+
+```bash
+mkdir build && cd build
+cmake ..
+make
+
+## Code Coverage
+
+### Using CMake target:
+```bash
+mkdir build && cd build
+cmake -DENABLE_COVERAGE=ON ..
+make coverage
+open coverage_report/index.html

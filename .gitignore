@@ -40,4 +40,11 @@
 # debug information files
 *.dwo
 
+# Coverage reports
+*.gcda
+*.gcno
+*.gcov
+coverage.info
+coverage_report/
+
 CMakeLists.txt.user

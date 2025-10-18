@@ -14,3 +14,9 @@ target_link_libraries(runTests
 # Добавление теста в CTest
 include(GoogleTest)
 gtest_discover_tests(runTests)
+
+# Для coverage добавляем флаги компиляции
+if(ENABLE_COVERAGE AND CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+    target_compile_options(runTests PRIVATE --coverage)
+    target_link_libraries(runTests PRIVATE --coverage)
+endif()
